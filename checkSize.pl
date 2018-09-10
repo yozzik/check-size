@@ -2,7 +2,7 @@
 
 # This script connects to the "lux" database, "files" table, sums up all sizeOfFile fields and compares it with provided maximum size
 
-# Get all encessary modules: DBI for interfacing with database, strict to restrict unsafe actions
+# Get all necessary modules: DBI for interfacing with database, use strict to restrict unsafe actions
 use DBI;
 use strict;
 
@@ -21,19 +21,19 @@ my $password = "112358";
 
 # Establish connection via DBI, RaiseErrors if they appear
 my $dbh = DBI->connect($dsn, $user, $password, {RaiseError => 1});
-# Prepare a query and execute it
+# Prepare the query and execute it
 my $sth = $dbh->prepare($query);
 $sth->execute();
 
 
-# Get sum(sizeOfFile) from DB
+# Get  from DB
 my $sizeOfFileSum = $sth->fetchrow();
 
 
 # Print results
 if ($sizeOfFileSum < $checkSize) {
-  print "Size of files is less then check size: $sizeOfFileSum / $checkSize ($maxSize MB).\n";
+  print "Size of files is less then max size: $sizeOfFileSum / $checkSize ($maxSize MB).\n";
 }
 else {
-  print "Size of files is more then check size: $sizeOfFileSum / $checkSize ($maxSize MB).\n";
+  print "Size of files is more then max size: $sizeOfFileSum / $checkSize ($maxSize MB).\n";
 }
