@@ -26,7 +26,7 @@ sub getSizeOfFilesFromDB {
   return ($fileSize);
 }
 
-# Print verification result based on checkSizeOfFiles subroutine result
+# Print verification result based on received size
 if (getSizeOfFilesFromDB() < $maxFileSize) {
   print "Size of files is less then $maxSize GB.\n";
 }
