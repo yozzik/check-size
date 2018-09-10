@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# https://github.com/yozzik/checkSize/blob/master/checkSize.pl
+# https://github.com/yozzik/checkSize/blob/master/check_size.pl
 # This script connects to the "lux" database, "files" table, sums up all sizeOfFile fields and compares it with provided maximum size
 
 # Get all encessary modules: DBI for interfacing with database, strict to restrict unsafe actions

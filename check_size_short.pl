@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# https://github.com/yozzik/checkSize/blob/master/checkSize.pl
+# https://github.com/yozzik/checkSize/blob/master/check_size_short.pl
 # Short version
 # This script connects to the "lux" database, "files" table, sums up all sizeOfFile fields and compares it with provided maximum size
 
@@ -16,12 +16,15 @@ my $dsn = "DBI:mysql:luxoft"; # Data Source Name
 my $user = "root";
 my $password = "root";
 
-
+# Establish connection, prepare and execute query
 my $dbh = DBI->connect($dsn, $user, $password, {RaiseError => 1});
 my $sth = $dbh->prepare($query);
 $sth->execute();
+
+# Save query results
 my $fileSize = $sth->fetchrow();
 
+# Validate files size
 if ($fileSize < $checkSize) {
   print "Size of files is less then check size: $fileSize / $checkSize ($maxSize GB).\n";
 }
@@ -29,5 +32,6 @@ else {
   print "Size of files is more then check size: $fileSize / $checkSize ($maxSize GB).\n";
 }
 
+# Close statement handler, disconnect from DB
 $sth->finish();
 $dbh->disconnect();
