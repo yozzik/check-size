@@ -11,19 +11,19 @@ use strict;
 my $maxSize = 4.7; # Max size in gigabytes
 my $maxFileSize = $maxSize * (1024 * 1024 * 1024); # Check sum in bytes
 my $query = "SELECT sum(sizeOfFiles) FROM files;"; # Query to be executed
-my $dsn = "DBI:mysql:luxoft"; # Data Source Name
-my $user = "root";
-my $password = "root";
+my $dsn = "DBI:mysql:lux"; # Data Source Name
+my $user = "test";
+my $password = "112358";
 
 sub getSizeOfFilesFromDB {
-  # Establish connection, prepare a query, execute it, close connection and return $fileSize
+  # Establish connection, prepare a query, execute it and save result, then close connection and return $fileSize
   my $dbh = DBI->connect($dsn, $user, $password, {RaiseError => 1});
   my $sth = $dbh->prepare($query);
   $sth->execute();
-  my $fileSize = $sth->fetchrow();
+  my $filesSize = $sth->fetchrow();
   $sth->finish();
   $dbh->disconnect();
-  return ($fileSize);
+  return ($filesSize);
 }
 
 # Print verification result based on received size
