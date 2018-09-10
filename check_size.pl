@@ -16,19 +16,18 @@ my $user = "root";
 my $password = "root";
 
 sub getFilesSizeFromDB {
-  # Establish connection, prepare a query, execute it and return result
+  # Establish connection, prepare a query, execute it, close connection and return $fileSize
   my $dbh = DBI->connect($dsn, $user, $password, {RaiseError => 1});
   my $sth = $dbh->prepare($query);
   $sth->execute();
-  return ($sth->fetchrow());
-
+  my $fileSize = $sth->fetchrow();
   $sth->finish();
-  print "ololo\n";
   $dbh->disconnect();
+  return ($fileSize);
 }
 
 sub validateFilesSize {
-  # Compare given size with maximum size
+  # Compare given size with maximum size, return True\False
   my $size = $_[0];
   return ($size < $checkSize);
 }
@@ -36,7 +35,7 @@ sub validateFilesSize {
 # Execute a query to the DB and get sum of files size
 my $sizeOfFileSum = getFilesSizeFromDB();
 
-# Final output, based on checkSizeOfFiles subroutine result
+# Print verification result based on checkSizeOfFiles subroutine result
 if (validateFilesSize($sizeOfFileSum)) {
   print "Size of files is less then check size: $sizeOfFileSum / $checkSize ($maxSize GB).\n";
 }
