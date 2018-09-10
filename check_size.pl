@@ -37,8 +37,8 @@ my $sizeOfFileSum = getFilesSizeFromDB();
 
 # Print verification result based on checkSizeOfFiles subroutine result
 if (validateFilesSize($sizeOfFileSum)) {
-  print "Size of files is less then check size: $sizeOfFileSum / $checkSize ($maxSize GB).\n";
+  print "Size of files is less then $maxSize GB.\n";
 }
 else {
-  print "Size of files is more then check size: $sizeOfFileSum / $checkSize ($maxSize GB).\n";
+  print "Size of files is more then $maxSize GB.\n";
 }
