@@ -1,4 +1,4 @@
-## Project title
+## Project summary
 Simple script for validating files in the DB by their size.
 
 ## How to use
